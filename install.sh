@@ -2,11 +2,11 @@
 
 if [[ $(id -u) -ne 0 ]] ; then echo "Please run as root" ; exit 1 ; fi
 
-read -p "Hostname [$(hostname)]: " HOSTNAME
+HOSTNAME="musicBox"
 raspi-config nonint do_hostname ${HOSTNAME:-$(hostname)}
 
 CURRENT_PRETTY_HOSTNAME=$(hostnamectl status --pretty)
-read -p "Pretty hostname [${CURRENT_PRETTY_HOSTNAME:-Raspberry Pi}]: " PRETTY_HOSTNAME
+PRETTY_HOSTNAME="Music Box"
 hostnamectl set-hostname --pretty "${PRETTY_HOSTNAME:-${CURRENT_PRETTY_HOSTNAME:-Raspberry Pi}}"
 
 echo "Updating packages"
@@ -43,6 +43,6 @@ systemctl --global mask pulseaudio.socket
 
 echo "Installing components"
 ./install-bluetooth.sh
-./install-shairport.sh
-./install-spotify.sh
-./enable-hifiberry.sh
+#./install-shairport.sh
+#./install-spotify.sh
+#./enable-hifiberry.sh
